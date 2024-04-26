@@ -1,0 +1,37 @@
+<script lang="ts">
+    import Icon from "./ICON.svelte";
+  
+      export let size: number = 16;
+      export let color: string = "#000"; // # = %23
+      export let bg: string = "#fff";
+//       const svg = `
+//         <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+//         <line x1="4.49322" y1="10.7652" x2="5.71822" y2="12.887" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+//         <line x1="6.34038" y1="9.69878" x2="7.56538" y2="11.8205" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+//         <line x1="7.65484" y1="7.70855" x2="9.41317" y2="10.7541" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+//         <line x1="10.0357" y1="7.56548" x2="11.2607" y2="9.68724" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+//         <line x1="11.8829" y1="6.49859" x2="13.1079" y2="8.62035" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+//         <line x1="13.7305" y1="5.43218" x2="14.9555" y2="7.55394" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+//         <mask id="path-7-inside-1_760_7212" fill="white">
+//         <rect y="8" width="16" height="7.46667" rx="1" transform="rotate(-30 0 8)"/>
+//         </mask>
+//         <rect y="8" width="16" height="7.46667" rx="1" transform="rotate(-30 0 8)" stroke='%color%' stroke-width="2" stroke-linejoin="round" mask="url(#path-7-inside-1_760_7212)"/>
+//         </svg>
+// `;
+
+  const svg = `
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_748_6244)">
+    <path d="M0.330051 8.27768C0.178427 8.36526 0.0677965 8.50948 0.0224894 8.67861C-0.0228177 8.84775 0.000908699 9.02796 0.0884506 9.1796L3.02285 14.2625C3.06622 14.3376 3.12395 14.4034 3.19275 14.4562C3.26156 14.509 3.34008 14.5477 3.42385 14.5701C3.50762 14.5926 3.59498 14.5983 3.68096 14.5869C3.76693 14.5756 3.84984 14.5475 3.92493 14.5041L15.6699 7.72328C15.745 7.67992 15.8108 7.62218 15.8636 7.55338C15.9164 7.48458 15.9551 7.40605 15.9775 7.32228C16 7.23851 16.0057 7.15115 15.9943 7.06517C15.983 6.9792 15.9549 6.8963 15.9115 6.8212L12.9771 1.73832C12.9337 1.66322 12.876 1.5974 12.8072 1.54462C12.7384 1.49183 12.6599 1.45312 12.5761 1.43068C12.4923 1.40825 12.405 1.40253 12.319 1.41386C12.233 1.42519 12.1501 1.45335 12.075 1.49672L0.330051 8.27768ZM1.56221 9.09112L12.1635 2.97048L14.4377 6.90968L13.6737 7.3508L12.8214 5.87416L12.2496 6.2044L13.1019 7.68088L12.2275 8.18584L11.375 6.7092L10.8032 7.03944L11.6557 8.51592L10.7822 9.02024L9.92973 7.5436L9.35789 7.87384L10.2104 9.35032L9.33597 9.85528L8.15133 7.8036L7.57949 8.13368L8.76413 10.1854L7.88957 10.6903L7.03709 9.21368L6.46525 9.54392L7.31773 11.0204L6.44429 11.5246L5.59197 10.0481L5.02013 10.3783L5.87245 11.8548L4.99805 12.3596L4.14557 10.8831L3.57373 11.2134L4.42621 12.6898L3.83645 13.0303L1.56221 9.09112Z" fill="%color%"/>
+    </g>
+    <defs>
+    <clipPath id="clip0_748_6244">
+    <rect width="16" height="16" fill="%bg%"/>
+    </clipPath>
+    </defs>
+  </svg>
+
+  ` 
+</script>
+  
+<Icon svgString={svg} {size} {color} {bg} />

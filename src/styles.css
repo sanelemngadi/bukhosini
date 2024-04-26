@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+*, *::after, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  /* transition: all 300ms; */
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  background-color: black;
+  /* border: 1px solid blue; */
+  overflow: hidden !important;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11.5px;
+  border-radius: 10px;
+  /* cursor: url(/src/assets/cursors/tools/selection_cursor.svg), auto; */
+}
+
+body > * {
+  height: 100%;
+  width: 100%;
+}
+
+select {
+  font-size: 10px;
+  height: 22.2px !important;
+  border-radius: 2px;
+}
+
+.sprot-app {
+  --ui-pointerEvents: all;
+  --ui-left: 0px;
+  --ui-translate: calc(-1px / 2);
+}
+
+.sprot-pointer-events {
+  pointer-events: var(--ui-pointerEvents);
+}
+
+canvas {
+  image-rendering: crisp-edges;
+  text-rendering: geometricPrecision;
+  /* cursor: crosshair; */
+  cursor: url(/src/assets/cursors/tools/selection_cursor.svg), auto;
+}
+
+.sprot-left {
+  left: var(--ui-left, 0px);
+  /* transform: translateX(var(--ui-translate));
+  width: calc(100vw - 2px) !important; */
+}
+
+button, label, span, div {
+  /* cursor: url(/src/assets/cursors/tools/selection_cursor.svg), auto; */
+  cursor: default;
+}
+
+button:focus {
+  outline: none;
+}
+
+
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: #f1f1f1; Set the background color of the scrollbar track */
+  @apply bg-sprotBgLight20;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  /* background: #888; Set the color of the scrollbar handle */
+  border-radius: 5px; /* Set the border radius of the scrollbar handle */
+  @apply bg-sprotText;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /* background: #555; Change the color of the scrollbar handle on hover */
+  @apply bg-sprotText;
+}
+
+
+.sprot-scroll {
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.sprot-scroll:hover::-webkit-scrollbar {
+  background-color: transparent;
+  width: 8px;
+}
+/* Hide the default scrollbar */
+.sprot-scroll::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Track */
+.sprot-scroll::-webkit-scrollbar-track {
+  /* background: #f1f1f1; Set the background color of the scrollbar track */
+  /* opacity: 0; */
+  @apply bg-transparent;
+}
+
+.sprot-scroll:hover::-webkit-scrollbar-thumb {
+  @apply bg-sprotBgLight60;
+}
+/* Handle */
+.sprot-scroll::-webkit-scrollbar-thumb {
+  /* background: #888; Set the color of the scrollbar handle */
+  border-radius: 5px; /* Set the border radius of the scrollbar handle */
+  /* opacity: 0; */
+  @apply bg-transparent;
+}
+
+/* Handle on hover */
+/* .sprot-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555; Change the color of the scrollbar handle on hover
+  @apply bg-sprotText;
+} */
+
+
+
+.sprot-request-attention {
+  animation: flicker 450ms ease-in-out;
+}
+
+
+@keyframes flicker {
+  10% {
+      outline:4px solid blue;
+  }
+  50% {
+      outline:4px solid black;
+  }
+  90% {
+      outline:4px solid blue;
+  }
+  100% {
+      outline:4px solid black;
+  }
+}
