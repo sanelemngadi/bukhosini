@@ -4,21 +4,7 @@
       export let size: number = 16;
       export let color: string = "#000"; // # = %23
       export let bg: string = "#fff";
-//       const svg = `
-//         <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-//         <line x1="4.49322" y1="10.7652" x2="5.71822" y2="12.887" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-//         <line x1="6.34038" y1="9.69878" x2="7.56538" y2="11.8205" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-//         <line x1="7.65484" y1="7.70855" x2="9.41317" y2="10.7541" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-//         <line x1="10.0357" y1="7.56548" x2="11.2607" y2="9.68724" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-//         <line x1="11.8829" y1="6.49859" x2="13.1079" y2="8.62035" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-//         <line x1="13.7305" y1="5.43218" x2="14.9555" y2="7.55394" stroke='%color%' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-//         <mask id="path-7-inside-1_760_7212" fill="white">
-//         <rect y="8" width="16" height="7.46667" rx="1" transform="rotate(-30 0 8)"/>
-//         </mask>
-//         <rect y="8" width="16" height="7.46667" rx="1" transform="rotate(-30 0 8)" stroke='%color%' stroke-width="2" stroke-linejoin="round" mask="url(#path-7-inside-1_760_7212)"/>
-//         </svg>
-// `;
-
+      export let disabled: boolean = false;
   const svg = `
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_748_6244)">
@@ -34,4 +20,4 @@
   ` 
 </script>
   
-<Icon svgString={svg} {size} {color} {bg} />
+<Icon svgString={svg} {size} {color} {bg} {disabled} />

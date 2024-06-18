@@ -1,14 +1,8 @@
 <script lang="ts">
-  import { DropdownOutline, Eye, MoreOptions, Trash } from "$components/icons";
-  import Edit from "$components/icons/Edit.svelte";
+  import { DropdownOutline, MoreOptions } from "$components/icons";
   import Plus from "$components/icons/Plus.svelte";
-//   import { Move, Rotate, Scale } from "$components/icons/modifiers";
-  import type { ComponentType } from "svelte";
   import BitmapButton from "$components/general/BitmapButton.svelte";
   import DullButton from "./DullButton.svelte";
-  import HatchItem from "./accordion/HatchItem.svelte";
-  import MarginItem from "./accordion/MarginItem.svelte";
-  import OutlineItem from "./accordion/OutlineItem.svelte";
   import type { ISprotAccordionListItem, SprotActions } from "$lib/types";
 //   import BitmapButton from "./BitmapButton.svelte";
     export let options: boolean = true;
@@ -24,24 +18,6 @@
         active = !active;
     }
 
-    // type SprotAccordionListItemKind = "outline" | "hatch" | "transformation" | "margins";
-
-    // interface SprotAccordionListItem {
-    //     id: number,
-    //     name: string,
-    //     active: boolean, // when active the modifier will be set for canvas but if you have
-    //     // values edit will help for that
-    //     kind: SprotAccordionListItemKind,
-    //     icon?: ComponentType,
-    //     // creationComponent: ComponentType,
-    // }
-
-    // let items: SprotAccordionListItem[] = [
-    //     // { id: 0, active: false, icon: Scale, name: "Scale(1.52)" },
-    //     // { id: 1, active: false, icon: Rotate, name: "Rotate(25.32.52)" },
-    //     // { id: 2, active: false, icon: Move, name: "Translate(124.24, 224.24)" },
-    // ]
-
     let viewItems: ISprotAccordionListItem[] = [];
 
     const setActive = (kind: SprotActions) => {
@@ -52,18 +28,12 @@
             
             return item;
         });
-
-        console.log("on active: ", kind);
-        
     }
 
     const onAddAccordionListItem = () => {
         if(active === false) {
             active = true;
         }
-
-        // items = [...items, {id: items.length, active: false, name: `item-${items.length}`, kind: "hatch"}];
-        // viewItems = items;
     }
 
     const onEdit = (kind: SprotActions ) => {

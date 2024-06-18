@@ -1,14 +1,10 @@
 import { SprotActions, SprotToolKind } from "$lib/types";
-import { 
-    SprotAppViewController, SprotModifierToolSet, SprotSelectionWrapper
-} from "$wasm/sprot_app";
-import { ScalePanel } from "$components/canvas/toplevels";
-// import { SprotCanvasTool } from "$lib/tools/base";
-import { SprotCanvasModifierTool } from "./base";
-import type { SprotOption } from "$lib/utils";
+import { SprotToolSet } from "$wasm/sprot_app";
 import {  Scale } from "$components/icons/modifiers";
+import { SprotCanvasTool } from "$lib/tools/base";
 
-export class SprotScaleTool extends SprotCanvasModifierTool {
+export class SprotScaleTool extends SprotCanvasTool {
+    public toolSet: SprotToolSet;
 
     constructor() {
         const name = "Scale";
@@ -18,13 +14,6 @@ export class SprotScaleTool extends SprotCanvasModifierTool {
         const shortkey = "Z";
         super(name, id, kind, icon, shortkey);
         
-        this.panelComponent = ScalePanel ;
-        this.presets = [];
-    }
-
-    
-    init(app: SprotAppViewController): boolean { 
-        app.set_modifier_tool(SprotModifierToolSet.SprotScaleTool);
-        return false;
+        this.toolSet = SprotToolSet.SprotScaleTool;
     }
 }

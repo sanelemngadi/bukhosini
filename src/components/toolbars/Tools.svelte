@@ -1,62 +1,71 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import Seperator from "./Seperator.svelte";
-  import ToolPresets from "./ToolPresets.svelte";
-
-  // import Toolbar from "./Toolbar.svelte";
-  // import ToolsContainer from "./tools/ToolsContainer.svelte";
   import type { SprotCanvasTool } from "$lib/tools/base";
-  import { getTargetTool } from "$lib/stores";
-  // import { togglePanels } from "$lib/stores/panels-state";
+  import {
+    getActionPreset,
+    getAppViewController,
+    getTargetTool,
+  } from "$lib/stores";
   import ToolLayers from "./ToolLayers.svelte";
-  // import SnappingModes from "./SnappingModes.svelte";
-  // import SelectionOperations from "$components/canvas/toplevels/SelectionOperations.svelte";
-  // import ToggleOperations from "./ToggleOperations.svelte";
-  // import button from "$components/general/RaisedButton.svelte";
-  import ActionColor from "./ActionColor.svelte";
-  import { Select } from "$components/ui";
+  import BitmapButton from "$components/general/BitmapButton.svelte";
+  import type { SprotAppViewController } from "$wasm/sprot_app";
+  import type { SprotListButton } from "$lib/types";
+
+  export let disabledAll: boolean = false;
 
   let targetTool: SprotCanvasTool | null = null;
+  let appState: SprotAppViewController | null = null;
+  // let presets: SprotListButton[] = [];
 
   onMount(() => {
-    getTargetTool(tool => targetTool = tool);
-    
+    getAppViewController((app) => (appState = app));
+    getTargetTool((tool) => (targetTool = tool));
   });
 
-  // const onPanels = () => { togglePanels(); }
+  // getActionPreset((preset_id) => {
+  //   if (targetTool) {
+  //     if (targetTool.presets.find((p) => p.id == preset_id)) {
+  //       presets = targetTool.presets.map((active) => {
+  //         active.active = active.id === preset_id;
+  //         return active;
+  //       });
+  //     }
+  //   }
+  // });
+
+  const onSetActivePreset = (preset_id: number) => {
+    if (targetTool && appState) {
+      targetTool = targetTool.setActionPreset(appState, preset_id);
+    }
+  };
+
+  // $: if (targetTool) {
+  //   presets = targetTool.presets;
+  // }
 </script>
-<div class="flex w-full gap-1 justify-between h-7 borderl border-black bg-sprotBg text-sprotText text-[12px] pointer-events-auto">
+
+<div
+  class="sprot-center w-full gap-1 h-7 bg-sprotBgLight20 pointer-events-auto"
+>
   <div class="sprot-canvas-tools w-full">
-    <div class="flex items-center" >
-      <div class="w-1"></div>
-      <p class="text-sprotBgLight60">Sprot</p>
-      <Seperator />
-      
+    <div class="flex items-center gap-1">
+      <ToolLayers disabled={disabledAll} />
       {#if targetTool}
-        <ToolPresets tool={targetTool} />
+        {#each targetTool.presets as preset (preset.id)}
+          <BitmapButton
+            active={preset.active}
+            className="w-7 h-6"
+            on:click={() => onSetActivePreset(preset.id)}
+            disabled={disabledAll}
+          >
+            <svelte:component
+              this={preset.icon}
+              size={14}
+              disabled={disabledAll}
+            />
+          </BitmapButton>
+        {/each}
       {/if}
-
-      <!-- <Select /> -->
-
-      <Seperator vertical={false} />
-      <button class="max-h-5">
-        Use layer
-      </button>
-      <div class="w-1"></div>
-      <ToolLayers />
-        <div class="w-1"></div>
-        <ActionColor />
-        <div class="w-1"></div>
-        <button class="max-h-5">
-          Outline
-        </button>
-        <div class="w-1"></div>
-
-      {#if targetTool && targetTool.toolsPanel}
-        <svelte:component this={targetTool.toolsPanel} />
-      {/if}
-      
-      <Seperator />
     </div>
   </div>
 </div>

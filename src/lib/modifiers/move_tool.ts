@@ -1,18 +1,12 @@
 import { SprotActions, SprotToolKind } from "$lib/types";
-import { 
-        SprotAppViewController, SprotEntity, SprotModifierToolSet,
-    } from "$wasm/sprot_app";
-import {  MovePanel } from "$components/canvas/toplevels";
-import { SprotCanvasModifierTool } from "./base";
-import { None, Some, type SprotOption, SelectionOption } from "$lib/utils";
+import { SprotToolSet } from "$wasm/sprot_app";
 import { Move } from "$components/icons/modifiers";
-import { clearModifierTools } from "$lib/stores";
-import type { SprotClientCursor } from "$lib/cursor";
+import { SprotCanvasTool } from "$lib/tools/base";
+import { IMoveBetweenPoints, IMoveHorizontalPoints, IMoveToPoint, IMoveVerticalPoints } from "$components/icons/presets";
+import type { ComponentType } from "svelte";
 
-export class SprotMoveTool extends SprotCanvasModifierTool {
-    private _entity: SprotOption<SprotEntity[]>;
-    private _predicate: SprotOption<(selection: SprotOption<SelectionOption<SprotEntity>>) => void>;
-    private _path_stated: boolean;
+export class SprotMoveTool extends SprotCanvasTool {
+    public toolSet: SprotToolSet;
 
     constructor() {
         const name = "Move";
@@ -21,36 +15,22 @@ export class SprotMoveTool extends SprotCanvasModifierTool {
         const icon = Move;
         const shortkey = "E";
         super(name, id, kind, icon, shortkey);
+        this.toolSet = SprotToolSet.SprotMoveTool;
+    }
+
+    getIcon(preset_id: number): ComponentType {
+        switch (preset_id) {
+            case 1:
+                return IMoveToPoint;
+            case 2:
+                return IMoveBetweenPoints;
+            case 3:
+                return IMoveHorizontalPoints;
+            case 4:
+                return IMoveVerticalPoints;
         
-        this.panelComponent = MovePanel ;
-        this.presets = [];
-
-        this._entity = None;
-        this._predicate = None;
-        this._path_stated = false;
-    }
-
-    
-    init = (app: SprotAppViewController): boolean => { 
-        return app.set_modifier_tool(SprotModifierToolSet.SprotMoveTool);
-    }
-
-    onMouseDown = (app: SprotAppViewController, button: number = 0): SprotClientCursor => {
-        let interaction = super.onMouseDown(app, button);
-
-        if(button !== 0) {
-            return interaction;
+            default:
+                return this.icon;
         }
-
-        if (!this._path_stated ) {
-            this._path_stated = true;
-        } 
-        else {
-            // end movement tool
-            clearModifierTools();
-            app.set_modifier_tool(SprotModifierToolSet.SprotNoTool);
-            this._path_stated = false;
-        }
-        return interaction;
     }
 }

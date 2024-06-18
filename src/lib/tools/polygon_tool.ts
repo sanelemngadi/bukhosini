@@ -2,6 +2,7 @@ import { SprotActions, SprotToolKind } from "$lib/types";
 import { SprotToolSet } from "$wasm/sprot_app";
 import { SprotCanvasTool } from "./base";
 import { PolygonToolIcon } from "$components/icons/tools";
+import DrawingsConstraitsTrait from "$components/canvas/tools/DrawingsConstraitsTrait.svelte";
 
 export class SprotPolygonTool extends SprotCanvasTool {
     public toolSet: SprotToolSet;
@@ -15,5 +16,6 @@ export class SprotPolygonTool extends SprotCanvasTool {
         super(name, id, kind, icon, shortkey);
         
         this.toolSet = SprotToolSet.SprotPolygonTool;
+        this.toolsPanel = [DrawingsConstraitsTrait];
     }
 }

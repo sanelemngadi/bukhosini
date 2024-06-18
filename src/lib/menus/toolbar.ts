@@ -15,6 +15,8 @@ export type TSprotToolbarItem = Pick<SprotMenubarItem, "active" | "id" | "name">
     kind: ISprotMenubarItemKind,
     icon: ComponentType,
     fit: boolean,
+    disabled: boolean,
+    event: (() => void) | null,
 }
 
 export class SprotToolbar {
@@ -28,7 +30,7 @@ export class SprotToolbar {
         this._active = false;
     }
 
-    addTool(name: string, icon: ComponentType, event: (() => {}) | null = null) {
+    addTool(name: string, icon: ComponentType, event: (() => void) | null = null) {
         const toolbarItem: TSprotToolbarItem = {
             active: false,
             id: this._idCounter++,
@@ -36,6 +38,8 @@ export class SprotToolbar {
             kind: ISprotMenubarItemKind.Button,
             icon,
             fit: true,
+            disabled: false,
+            event
         }
 
         this._toolbarItems.push(toolbarItem);
@@ -49,6 +53,8 @@ export class SprotToolbar {
             kind: ISprotMenubarItemKind.Control,
             icon,
             fit: true,
+            disabled: false,
+            event
         }
 
         this._toolbarItems.push(toolbarItem);
@@ -62,9 +68,27 @@ export class SprotToolbar {
             kind: ISprotMenubarItemKind.Seperator,
             icon: Seperator,
             fit: true,
+            disabled: false,
+            event: null
         }
 
         this._toolbarItems.push(toolbarItem);
+    }
+
+    onButtonClicked(id: number): SprotToolbar {
+        for (const tool of this._toolbarItems) {
+            if (tool.id === id && tool.event) {
+                tool.event();
+            }
+        }
+        return this;
+    }
+
+    disabled(d: boolean): SprotToolbar {
+        for(const tool of this._toolbarItems) {
+            tool.disabled = d;
+        }
+        return this;
     }
 
     #getToolSize(item: TSprotToolbarItem): SprotTSSize {

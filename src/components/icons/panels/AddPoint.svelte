@@ -4,6 +4,7 @@
       export let size: number = 16;
       export let color: string = "#000"; // # = %23
       export let bg: string = "#fff";
+      export let disabled: boolean = false;
       const svg = `
         <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.6397 16.3536C18.8349 16.1583 18.8349 15.8417 18.6397 15.6464L15.4577 12.4645C15.2624 12.2692 14.9459 12.2692 14.7506 12.4645C14.5553 12.6597 14.5553 12.9763 14.7506 13.1716L17.579 16L14.7506 18.8284C14.5553 19.0237 14.5553 19.3403 14.7506 19.5355C14.9459 19.7308 15.2624 19.7308 15.4577 19.5355L18.6397 16.3536ZM18.2861 15.5L0.000419617 15.5V16.5L18.2861 16.5V15.5Z" fill="%color%"/>
@@ -11,6 +12,6 @@
         </svg>`;
   </script>
   
-<Icon svgString={svg} {size} {color} {bg} />   
+<Icon svgString={svg} {size} {color} {bg} {disabled} />   
 
     

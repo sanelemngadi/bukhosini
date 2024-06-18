@@ -3,18 +3,28 @@
     // import CadItem from "$components/general/accordion/CADItem.svelte";
     import { SprotPathPremitiveKind, type SprotPathPremitive } from "$lib/api/pathpremitives";
     import { No_PATH, type SprotPathPremitiveType } from "$lib/panels/types/path_panel_types";
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
   
       export let path: SprotPathPremitive;
+      let input:HTMLInputElement;
+
+      onMount(() => {
+        if(input) {
+            input.focus();
+        }
+      });
+
+      $: {
+        if(path && input) {
+            input.focus();
+        }
+      }
 
       let dispatch = createEventDispatcher();
 
       let distance = "0.0";
 
       const onChangeDistance = (e: any) => {
-        // const target = e.target as HTMLInputElement | null;
-        // if(!target) { return; }
-
         const value = parseFloat(distance);
 
         if(isNaN(value)) { return; }
@@ -22,6 +32,10 @@
         dispatch("change", new_path);
 
         distance = '';
+
+        if(input) {
+            input.focus();
+        }
       }
 
       const onAddLineToSide = (distance: number, kind: SprotPathPremitiveKind): SprotPathPremitiveType => {
@@ -44,7 +58,6 @@
         
             default: // default is no path
                 break;
-
         }
         
         return path;
@@ -56,6 +69,7 @@
         <label for={"item-"+path.id} class="flex gap-2 items-center">Dist 
             <input 
                 type="text" 
+                bind:this={input}
                 name={"item-"+path.id} 
                 id={"item-"+path.id} 
                 bind:value={distance}

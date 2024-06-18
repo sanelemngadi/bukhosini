@@ -1,14 +1,14 @@
 import { SprotActions, SprotToolKind } from "$lib/types";
-import { SprotAppViewController, SprotEntity } from "$wasm/sprot_app";
-import {  AlignmentPanel } from "$components/canvas/toplevels";
-import { SprotCanvasModifierTool } from "./base";
-import { None, type SprotOption, SelectionOption } from "$lib/utils";
+import { SprotToolSet } from "$wasm/sprot_app";
 import { Align } from "$components/icons";
+import { SprotCanvasTool } from "$lib/tools/base";
+import AlignmentToolTrait from "$components/canvas/tools/AlignmentToolTrait.svelte";
+import type { ComponentType } from "svelte";
+import { BottomVertical, CenterHorizontal, CenterVertical, LeftHorizontal, RightHorizontal, TopVertical } from "$components/icons/alignment";
 
-export class SprotAlignmentTool extends SprotCanvasModifierTool {
-    private _entity: SprotOption<SprotEntity[]>;
-    private _predicate: SprotOption<(selection: SprotOption<SelectionOption<SprotEntity>>) => void>;
-    private _path_stated: boolean;
+export class SprotAlignmentTool extends SprotCanvasTool {
+    public toolSet: SprotToolSet;
+
 
     constructor() {
         const name = "Alignment";
@@ -17,18 +17,27 @@ export class SprotAlignmentTool extends SprotCanvasModifierTool {
         const icon = Align;
         const shortkey = "A";
         super(name, id, kind, icon, shortkey);
-        
-        this.panelComponent = AlignmentPanel ;
-        this.presets = [];
-
-        this._entity = None;
-        this._predicate = None;
-        this._path_stated = false;
+        this.toolSet = SprotToolSet.SprotAlignmentTool;
+        this.toolsPanel = [ AlignmentToolTrait ];
     }
 
-    
-    init = (app: SprotAppViewController): boolean => { 
-        // return app.set_modifier_tool(SprotModifierToolSet.SprotArrangmentTool, selection);
-        return true;
+    getIcon(preset_id: number): ComponentType {
+        switch (preset_id) {
+            case 1:
+                return LeftHorizontal;
+            case 2:
+                return CenterHorizontal;
+            case 3:
+                return RightHorizontal;
+            case 4:
+                return TopVertical;
+            case 5:
+                return CenterVertical;
+            case 6:
+                return BottomVertical;
+        
+            default:
+                return this.icon;
+        }
     }
 }

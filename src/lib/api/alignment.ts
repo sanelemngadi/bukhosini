@@ -50,18 +50,18 @@ export const alignments: SprotAlignments[] = [
         icon: BottomVertical,
         kind: "vertical"
     },
-    {
-        id: SprotActions.AlignDistributeHorizontal,
-        name: "Distribute Horizontal",
-        active: false,
-        icon: DistributeHorizontal,
-        kind: "distribution"
-    },
-    {
-        id: SprotActions.AlignDistributeVertical,
-        name: "Distribute Vertical",
-        active: false,
-        icon: DistributeVertical,
-        kind: "distribution"
-    },
+    // {
+    //     id: SprotActions.AlignDistributeHorizontal,
+    //     name: "Distribute Horizontal",
+    //     active: false,
+    //     icon: DistributeHorizontal,
+    //     kind: "distribution"
+    // },
+    // {
+    //     id: SprotActions.AlignDistributeVertical,
+    //     name: "Distribute Vertical",
+    //     active: false,
+    //     icon: DistributeVertical,
+    //     kind: "distribution"
+    // },
 ]

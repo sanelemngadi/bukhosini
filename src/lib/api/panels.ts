@@ -1,20 +1,20 @@
 // import History as HistoryIcon from "$components/icons/History.svelte";
-    import { CanvasMessage, Ellipse, History as HistoryIcon } from "$components/icons";
+    import { History as HistoryIcon, Line } from "$components/icons";
     import { Rotate } from "$components/icons/modifiers";
-import ColorPanelIcon from "$components/icons/panels/ColorPanelIcon.svelte";
-import ContoursPanelIcon from "$components/icons/panels/ContoursPanelIcon.svelte";
-import DocumentationIcon from "$components/icons/panels/DocumentationIcon.svelte";
-import FontsPanelIcon from "$components/icons/panels/FontsPanelIcon.svelte";
-import LayersPanelIcon from "$components/icons/panels/LayersPanelIcon.svelte";
-import PatternsPanelIcon from "$components/icons/panels/PatternsPanelIcon.svelte";
-import PropertiesPanelIcon from "$components/icons/panels/PropertiesPanelIcon.svelte";
-import SurfacesPanelIcon from "$components/icons/panels/SurfacesPanelIcon.svelte";
-import TemplatesPanelIcon from "$components/icons/panels/TemplatesPanelIcon.svelte";
-import ToolboxPanelIcon from "$components/icons/panels/ToolboxPanelIcon.svelte";
+    import ColorPanelIcon from "$components/icons/panels/ColorPanelIcon.svelte";
+    import ContoursPanelIcon from "$components/icons/panels/ContoursPanelIcon.svelte";
+    import DocumentationIcon from "$components/icons/panels/DocumentationIcon.svelte";
+    import FontsPanelIcon from "$components/icons/panels/FontsPanelIcon.svelte";
+    import LayersPanelIcon from "$components/icons/panels/LayersPanelIcon.svelte";
+    import PatternsPanelIcon from "$components/icons/panels/PatternsPanelIcon.svelte";
+    import PropertiesPanelIcon from "$components/icons/panels/PropertiesPanelIcon.svelte";
+    import SurfacesPanelIcon from "$components/icons/panels/SurfacesPanelIcon.svelte";
+    import TemplatesPanelIcon from "$components/icons/panels/TemplatesPanelIcon.svelte";
+    import ToolboxPanelIcon from "$components/icons/panels/ToolboxPanelIcon.svelte";
     import { PathToolIcon } from "$components/icons/tools";
     import { 
         Contours, Documentation, FixSurface, Fonts, 
-        History, Layers, Patterns, Presets, Properties, 
+        History, Layers, Patterns, Properties, 
         Swatches, Templates, Toolset 
     } from "$components/panels";
     import DefinePath from "$components/panels/path/DefinePath.svelte";
@@ -31,30 +31,38 @@ export const panels: ISprotPanel[] = [
         component: Properties,
         icon: PropertiesPanelIcon, 
     }, // document here
+    // { 
+    //     id: SprotActions.PanelLayers, 
+    //     name: "Layers", 
+    //     active: false,
+    //     selected: true,
+    //     component: Layers,
+    //     icon: LayersPanelIcon,
+    // },
     { 
-        id: SprotActions.PanelLayers, 
-        name: "Layers", 
+        id: SprotActions.PanelFixSurfaces, 
+        name: "Fix Surfaces", 
         active: false,
         selected: true,
-        component: Layers,
-        icon: LayersPanelIcon,
+        component: FixSurface, 
+        icon: SurfacesPanelIcon,
     },
-    { 
-        id: SprotActions.PanelHistory, 
-        name: "History", 
-        active: false,
-        selected: true,
-        component: History,
-        icon: HistoryIcon, 
-    },
-    { 
-        id: SprotActions.PanelTransformations, 
-        name: "Transformations", 
-        active: false,
-        selected: true,
-        component: Transform,
-        icon: Rotate, 
-    },
+    // { 
+    //     id: SprotActions.PanelHistory, 
+    //     name: "History", 
+    //     active: false,
+    //     selected: true,
+    //     component: History,
+    //     icon: HistoryIcon, 
+    // },
+    // { 
+    //     id: SprotActions.PanelTransformations, 
+    //     name: "Transformations", 
+    //     active: false,
+    //     selected: true,
+    //     component: Transform,
+    //     icon: Rotate, 
+    // },
     { 
         id: SprotActions.PanelPath, 
         name: "Path", 
@@ -72,36 +80,27 @@ export const panels: ISprotPanel[] = [
         icon: DocumentationIcon,
     }, 
     { 
-        id: SprotActions.PanelPatterns, 
-        name: "Patterns", 
-        active: false,
-        selected: true,
-        component: Patterns, 
-        icon: PatternsPanelIcon,
-    }, 
-    { 
         id: SprotActions.PanelToolset, 
-        name: "Toolset", 
+        name: "Tool Options", 
         active: false,
         selected: true,
         component: Toolset, 
         icon: ToolboxPanelIcon,
     },
+    { 
+                id: SprotActions.PanelPatterns, 
+                name: "Patterns", 
+                active: false,
+                selected: true,
+                component: Patterns, 
+                icon: PatternsPanelIcon,
+    }, 
     // { 
     //     id: SprotActions.PanelPrint, 
     //     name: "Print", 
     //     active: false,
     //     selected: true,
     // },
-
-    { 
-        id: SprotActions.PanelFixSurfaces, 
-        name: "Fix Surfaces", 
-        active: false,
-        selected: true,
-        component: FixSurface, 
-        icon: SurfacesPanelIcon,
-    },
     { 
         id: SprotActions.PanelTemplates, 
         name: "Templates", 
@@ -110,13 +109,14 @@ export const panels: ISprotPanel[] = [
         component: Templates, 
         icon: TemplatesPanelIcon,
     },
-    { 
-        id: SprotActions.PanelPresets, 
-        name: "Presets", 
-        active: false,
-        selected: true,
-        component: Presets, 
-    },
+    // { 
+    //     id: SprotActions.PanelPresets, 
+    //     name: "Presets", 
+    //     active: false,
+    //     selected: true,
+    //     component: Presets, 
+    //     icon: Line
+    // },
     { 
         id: SprotActions.PanelSwatches, 
         name: "Color Settings", 

@@ -14,9 +14,7 @@ export class SprotPropertyPickerTool extends SprotCanvasTool {
         const icon = PropsPicker;
         const shortkey = "G";
         super(name, id, kind, icon, shortkey);
-        
-        this.panelComponent = null ;
 
-        this.toolSet = SprotToolSet.SprotSelectionTool;
+        this.toolSet = SprotToolSet.SprotPropertyPickerTool;
     }
 }

@@ -1,5 +1,5 @@
 import { NO_SELECTION, type SprotTSSelection } from "$lib/types";
-import { SprotSelectionWrapper } from "$wasm/sprot_app";
+import { SprotSelection } from "$wasm/sprot_app";
 import { writable } from "svelte/store";
 
 // const initState: SprotTSSelection = {
@@ -18,15 +18,17 @@ export const getCurrentSelection = (predicate: (item: SprotTSSelection) => void)
     });
 }
 
-export const setCurrentSelection = (selected: SprotSelectionWrapper) => {
+export const setCurrentSelection = (selected: SprotSelection) => {
+    let rect = selected.get_bounding_box();
+
     selection.update(() => {
         let selection: SprotTSSelection = {
             entities: selected.get_entities(),
-            is_group: selected.is_group,
-            is_none: selected.is_none,
-            is_single: selected.is_single,
+            is_group: selected.is_group(),
+            is_none: selected.is_empty(),
+            is_single: selected.is_single(),
             label: selected.get_selection_label(),
-            rect: {pt: {x: selected.x, y: selected.y }, sz: {w: selected.w, h: selected.h }}
+            rect: {pt: {x: rect.x, y: rect.y }, sz: {w: rect.w, h: rect.h }}
         }
 
         return selection;

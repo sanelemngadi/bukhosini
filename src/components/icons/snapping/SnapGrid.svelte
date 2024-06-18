@@ -4,6 +4,7 @@
       export let size: number = 16;
       export let color: string = "#000"; // # = %23
       export let bg: string = "#fff";
+      export let disabled: boolean = false;
       const svg = `
       <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 0L4 15" stroke="%color%"/>
@@ -16,4 +17,4 @@
         </svg>`;
   </script>
   
-<Icon svgString={svg} {size} {color} {bg} />       
+<Icon svgString={svg} {size} {color} {bg} {disabled} />       

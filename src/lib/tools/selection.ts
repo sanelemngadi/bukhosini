@@ -1,21 +1,13 @@
 import { SprotActions, SprotToolKind } from "$lib/types";
-import { SprotAppViewController, SprotSelectionWrapper, SprotToolSet, type SprotEntity } from "$wasm/sprot_app";
+import { SprotToolSet } from "$wasm/sprot_app";
 import { SprotCanvasTool } from "./base";
-import { None, type SprotOption } from "$lib/utils";
 import { Selection } from "$components/icons";
-import { SelectionPanel } from "$components/canvas/toplevels";
-import { type SprotClientCursor } from "$lib/cursor";
-import SelectionOperations from "$components/canvas/toplevels/SelectionOperation.svelte";
-
-interface Predicate {
-    id: number,
-    predicate: (entity: SprotSelectionWrapper) => void
-}
+import SelectionToolTrait from "$components/canvas/tools/SelectionToolTrait.svelte";
+import type { ComponentType } from "svelte";
+import { I2PointRect, IFreehand } from "$components/icons/presets";
+import { SnapVertex } from "$components/icons/snapping";
 
 export class SprotSelectionTool extends SprotCanvasTool {
-    private _entity: SprotOption<SprotEntity[]>;
-    private _callbacks: Predicate[];
-    private _predicateIdCounter: number;
     public toolSet: SprotToolSet;
 
     constructor() {
@@ -26,35 +18,22 @@ export class SprotSelectionTool extends SprotCanvasTool {
         const shortkey = "S";
         super(name, id, kind, icon, shortkey);
         
-        this.panelComponent = SelectionPanel ;
-        this.toolsPanel = SelectionOperations;
+        this.toolsPanel = [ SelectionToolTrait ];
         this.toolSet = SprotToolSet.SprotSelectionTool;
-        
-        this._entity = None;
-        this._callbacks = [];
-        this._predicateIdCounter = 1;
-
         this.active = true;
     }
 
-    onMouseDown = (app: SprotAppViewController, button: number): SprotClientCursor => {
-        let interaction = super.onMouseDown(app, button);
-
-        return interaction;
-    }
-
-    onSelection = (predicate: (entity: SprotSelectionWrapper) => void) => {
-        const event: Predicate = {
-            id: this._predicateIdCounter++,
-            predicate
+    getIcon(preset_id: number): ComponentType {
+        switch (preset_id) {
+            case 1:
+                return I2PointRect;
+            case 2:
+                return SnapVertex;
+            case 3:
+                return IFreehand;
+        
+            default:
+                return this.icon;
         }
-
-        this._callbacks.push(event);
-    }
-
-    onMouseUp(app: SprotAppViewController, button: number): SprotClientCursor {
-        const interaction = super.onMouseUp(app, button);
-
-        return interaction;
     }
 }

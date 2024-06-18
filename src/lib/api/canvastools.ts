@@ -1,10 +1,19 @@
 import { 
+  SprotAlignmentTool, SprotArrangementTool, 
+  SprotDistributionTool, SprotMoveTool, 
+  SprotRotateTool, SprotScaleTool 
+} from "$lib/modifiers";
+import { SprotLineBuilderTool } from "$lib/modifiers/line_builder_tool";
+import { SprotShapeBuilderTool } from "$lib/modifiers/shape_builder_tool";
+import { 
   SprotDimensionsTool,
   SprotEllipseTool, SprotLineTool, SprotMeasureTool, SprotNavigateTool, SprotPanTool, 
   SprotPolygonTool, 
   SprotPropertyPickerTool, SprotRectTool, SprotSelectionTool, SprotTextTool,
   SprotZoomTool } from "$lib/tools";
+import { SprotAnchorTool } from "$lib/tools/anchor_tool";
 import { SprotArcTool } from "$lib/tools/arc_tool";
+import { SprotCommentsTool } from "$lib/tools/comments_tool";
 import { SprotMessageTool } from "$lib/tools/message_tool";
 import { SprotPenTool } from "$lib/tools/pen_tool";
 import { SprotPencilTool } from "$lib/tools/pencil_tool";
@@ -13,199 +22,72 @@ import { type SprotToolGroup } from "$lib/types";
   
 export const canvasTools: SprotToolGroup[] = [ // each tool have presets as well
     {
-      name: "selections",
-      tools: [new SprotSelectionTool(), new SprotPropertyPickerTool()],
+      id: 0,
+      name: "Pick",
+      active: false,
+      featured: false,
+      tools: [new SprotSelectionTool(), new SprotPropertyPickerTool(), new SprotAnchorTool()],
     },
     {
-      name: "Pens",
-      tools: [new SprotPenTool(), new SprotPencilTool()],
-    },
-    {
-      name: "shapes",
+      id: 2,
+      name: "Draw",
+      active: false,
+      featured: false,
       tools: [ 
-        new SprotRectTool(), new SprotLineTool(), new SprotArcTool,
-        new SprotEllipseTool(), new SprotPolygonTool() 
+        new SprotRectTool(), 
+        new SprotLineTool(), 
+        new SprotArcTool,
+        new SprotEllipseTool(), 
+        new SprotPolygonTool() 
       ],
     },
     {
-      name: "typography",
-      tools: [ new SprotTextTool, new SprotMessageTool() ],
+      id: 4,
+      name: "Transform",
+      active: false,
+      featured: false,
+      tools: [ new SprotMoveTool(), new SprotScaleTool(), new SprotRotateTool(), ]
     },
     {
-      name: "ruler",
-      tools: [new SprotMeasureTool(), new SprotDimensionsTool()],
+      id: 5,
+      name: "Modify",
+      active: false,
+      featured: false,
+      tools: [ 
+        new SprotLineBuilderTool(),
+        new SprotShapeBuilderTool(),
+        
+        new SprotAlignmentTool(),
+        new SprotArrangementTool(),
+        new SprotDistributionTool(),
+      ]
     },
     {
-      name: "explore",
+      id: 6,
+      name: "Annotate",
+      active: false,
+      featured: false,
+      tools: [ new SprotTextTool(), new SprotCommentsTool(), new SprotMessageTool(), new SprotDimensionsTool() ]
+    },
+    {
+      id: 8,
+      name: "Navigate",
+      active: false,
+      featured: false,
       tools: [new SprotPanTool(), new SprotZoomTool(), new SprotNavigateTool() ],
     },
+    {
+      id: 1,
+      name: "Pens",
+      active: false,
+      featured: true,
+      tools: [new SprotPenTool(), new SprotPencilTool()],
+    },
+    {
+      id: 3,
+      name: "Information",
+      active: false,
+      featured: true,
+      tools: [ new SprotMeasureTool() ],
+    },
   ]
-// export const canvasTools: SprotToolGroup[] = [ // each tool have presets as well
-//     {
-//       name: "selections",
-//       tools: [
-//         { 
-//           name: "Selection", 
-//           active: false, 
-//           shortkey: "(S)", 
-//           id: SprotActions.ToolSelection, 
-//           icon: Selection, 
-//           kind: SprotToolKind.SelectionTool,
-//           panelComponent: SelectionPanel,
-//           onMouseDown(e) {
-            
-//           },
-//         },
-//         { 
-//           name: "Erasor", 
-//           active: false, 
-//           shortkey: "(E)", 
-//           id: SprotActions.ToolErasor, 
-//           icon: Erasor, 
-//           kind: SprotToolKind.SelectionTool,
-//           onMouseDown(e) {
-            
-//           }, 
-//         },
-//         { 
-//           name: "Property Picker"
-//           , active: false,
-//            shortkey: "(P)", 
-//            id: SprotActions.ToolPropertyPicker, 
-//            icon: PropsPicker, 
-//            kind: SprotToolKind.SelectionTool ,
-//            onMouseDown(e) {
-             
-//            },
-//           },
-//       ],
-//     },
-//     {
-//       name: "shapes",
-//       tools: [
-//         { 
-//           name: "Rectangle", 
-//           active: false, 
-//           shortkey: "(R)", 
-//           id: SprotActions.ToolRectangle, 
-//           icon: Rect, 
-//           kind: SprotToolKind.DrawingTool,
-//           panelComponent: DrawingPanel,
-//           onMouseDown(e) {
-            
-//           },
-//         },
-//         { 
-//           name: "Line", 
-//           active: false, 
-//           shortkey: "(L)", 
-//           id: SprotActions.ToolLine, 
-//           icon: Line, 
-//           kind: SprotToolKind.DrawingTool,
-//           panelComponent: DrawingPanel,
-//           onMouseDown(e) {
-            
-//           },
-//         },
-//         { 
-//           name: "Ellispe", 
-//           active: false, 
-//           shortkey: "(E)", 
-//           id: SprotActions.ToolEllipse, 
-//           icon: Ellipse, 
-//           kind: SprotToolKind.DrawingTool,
-//           panelComponent: DrawingPanel,
-//           onMouseDown(e) {
-            
-//           },
-//         },
-//       ],
-//     },
-//     {
-//       name: "typography",
-//       tools: [
-//         { 
-//           name: "Text", 
-//           active: false, 
-//           shortkey: "(H)", 
-//           id: SprotActions.ToolText, 
-//           icon: Typography, 
-//           kind: SprotToolKind.TextTool ,
-//           panelComponent: DrawingText,
-//           onMouseDown(e) {
-            
-//           },
-//         }, // we only have text (vert or horizontal text is going to be presets)
-//         { 
-//           name: "Message", 
-//           active: false, 
-//           shortkey: "(M)", 
-//           id: SprotActions.ToolLeaveMessage, 
-//           icon: CanvasMessage, 
-//           kind: SprotToolKind.TextTool,
-//           onMouseDown(e) {
-            
-//           }, 
-//         },
-//       ],
-//     },
-//     {
-//       name: "ruler",
-//       tools: { 
-//         name: "measure", 
-//         active: false, 
-//         shortkey: "(M)", 
-//         id: SprotActions.ToolMeasure, 
-//         icon: Ruler, 
-//         kind: SprotToolKind.StandardTool ,
-//         panelComponent: MeasurePanel,
-//         onMouseDown(e) {
-          
-//         },
-//         presets: [
-//           { name: "Distance", },
-//           { name: "Area", },
-//           { name: "Volume", },
-//           { name: "Perimeter", },
-//         ]
-//       }
-//     },
-//     {
-//       name: "explore",
-//       tools: [
-//         { 
-//           name: "pan", 
-//           active: false, 
-//           shortkey: "(H)", 
-//           id: SprotActions.ToolPan, 
-//           icon: Hand, 
-//           kind: SprotToolKind.StandardTool,
-//           onMouseDown(e) {
-//             console.log("entity: ", e);
-//           }, 
-//         }, // we only have text (vert or horizontal text is going to be presets)
-//         { 
-//           name: "scale", 
-//           active: false, 
-//           shortkey: "(M)", 
-//           id: SprotActions.ToolScale, 
-//           icon: Zoom, 
-//           kind: SprotToolKind.StandardTool,
-//           onMouseDown(e) {
-            
-//           }, 
-//         },
-//         { 
-//           name: "navigate", 
-//           active: false, 
-//           shortkey: "(M)", 
-//           id: SprotActions.ToolNavigate, 
-//           icon: Selection, 
-//           kind: SprotToolKind.StandardTool,
-//           onMouseDown(e) {
-            
-//           }, 
-//         },
-//       ],
-//     },
-//   ]

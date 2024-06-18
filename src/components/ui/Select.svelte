@@ -3,9 +3,11 @@
     import DropDown from "$components/icons/DropDown.svelte";  
     export let className: string = ""
 
+    if(className) {}
+
   </script>
   
-  <DullButton className="sprot-layers relative rounded-sm px-0 border flex items-center justify-center border-sprotBgLight60 group bg-sprotBg1 hover:bg-sprotBgLight20 h-5 overflow-hidden"
+  <DullButton className="sprot-layers relative px-0 border flex items-center justify-center border-sprotBg1 group bg-sprotBg hover:bg-sprotBg1 h-[22px] overflow-hidden group"
     on:click> 
       <div  
           id="" 
@@ -13,8 +15,7 @@
           <slot/>
       </div>
   
-      <span class="w-4 h-full absolute right-0 top-0 border-lk pointer-events-none border-sprotBgLight60 inline-flex items-center justify-center rounded-tr-sm rounded-br-sm bg-sprotBgLight20"
-          style="box-shadow: inset -1px 1px 1px rgba(255, 255, 255, 0.10), inset 0px -1px 1px rgba(255, 255, 255, 0.10);">
+      <span class="w-4 h-full  absolute right-0 top-0 inline-flex items-center justify-center  hover:bg-sprotBgLight60">
           <DropDown color="white" size={4} />
       </span>
   </DullButton>

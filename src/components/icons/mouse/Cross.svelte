@@ -4,6 +4,7 @@
       export let size: number = 16;
       export let color: string = "#000"; // # = %23
       export let bg: string = "#fff";
+      export let disabled: boolean = false;
       const svg = `
       <svg width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1571 18.2808C17.9796 18.2808 18.6465 18.6992 18.6465 19.2153L18.6465 30.4299C18.6465 30.946 17.9796 31.3644 17.1571 31.3644C16.3345 31.3644 15.6676 30.946 15.6676 30.4299L15.6676 19.2153C15.6676 18.6992 16.3345 18.2808 17.1571 18.2808Z" fill="black" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -18,4 +19,4 @@
 `;
   </script>
   
-<Icon svgString={svg} {size} {color} {bg} />   
+<Icon svgString={svg} {size} {color} {bg} {disabled}/>   

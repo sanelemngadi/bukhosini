@@ -1,9 +1,10 @@
 <script lang="ts">
-    import Icon from "./ICON.svelte";
-      export let size: number = 16;
-      export let color: string = "#000"; // # = %23
-      export let bg: string = "#fff";
-      const svg = `
+  import Icon from "./ICON.svelte";
+  export let size: number = 16;
+  export let color: string = "#000"; // # = %23
+  export let bg: string = "#fff";
+  export let disabled: boolean = false;
+  const svg = `
       <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.67 16">
         <rect x="2.66" y="2.46" width="10.99" height="10.99" fill="none" stroke="%color%" stroke-miterlimit="10" stroke-width="1.5"/>
         <g>
@@ -22,6 +23,6 @@
         </g>
         <circle cx="8" cy="8" r="1" fill="#fff" stroke="%color%" stroke-miterlimit="10"/>
         </svg>`;
-  </script>
-    
-  <Icon svgString={svg} {size} {color} {bg} />  
+</script>
+
+<Icon svgString={svg} {size} {color} {bg} {disabled} />

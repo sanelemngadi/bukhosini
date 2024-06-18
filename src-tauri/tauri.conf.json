@@ -15,12 +15,19 @@
       "window": {
         "all": false,
         "startDragging": true,
-        "show": true
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "show": true,
+        "close": true,
+        "setTitle": true
       },
       "dialog": {
         "all": false,
         "open": true,
-        "save": true
+        "save": true,
+        "ask": true
       },
       "fs": {
         "all": false,
@@ -35,7 +42,7 @@
     },
     "windows": [
       {
-        "title": "sprot-app",
+        "title": "Sprot App",
         "width": 800,
         "height": 600,
         "minHeight": 540,

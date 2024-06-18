@@ -4,6 +4,7 @@
       export let size: number = 16;
       export let color: string = "#000"; // # = %23
       export let bg: string = "#fff";
+      export let disabled: boolean = false;
       const svg = `
       <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_1370_322)">
@@ -17,6 +18,6 @@
         </svg>`;
   </script>
   
-<Icon svgString={svg} {size} {color} {bg} />   
+<Icon svgString={svg} {size} {color} {bg} {disabled} />   
 
     

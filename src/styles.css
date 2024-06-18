@@ -4,6 +4,8 @@
 
 
 
+
+
 *, *::after, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -12,6 +14,8 @@
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+
+  text-wrap: nowrap;
   /* transition: all 300ms; */
 }
 
@@ -24,21 +28,33 @@ body {
   /* border: 1px solid blue; */
   overflow: hidden !important;
   /* font-family: Arial, Helvetica, sans-serif; */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 11.5px;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-family: Roboto; */
+  /* font-weight: 100; */
+
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+
+  font-size: 10.5px;
   border-radius: 10px;
   /* cursor: url(/src/assets/cursors/tools/selection_cursor.svg), auto; */
+  @apply text-sprotText;
 }
 
-body > * {
+dialog {
+  @apply text-sprotText;
+}
+/* body > * {
   height: 100%;
   width: 100%;
-}
+} */
 
 select {
   font-size: 10px;
   height: 22.2px !important;
-  border-radius: 2px;
+  /* border-radius: 2px; */
 }
 
 .sprot-app {
@@ -52,10 +68,19 @@ select {
 }
 
 canvas {
-  image-rendering: crisp-edges;
+  /* image-rendering: crisp-edges; */
+  /* image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges; */
+  image-rendering: pixelated;
+  shape-rendering: optimizeSpeed;
+  text-rendering: geometricPrecision;
+  /* shape-rendering: crispEdges; */
+  /* text-rendering: geometricPrecision; */
   text-rendering: geometricPrecision;
   /* cursor: crosshair; */
   cursor: url(/src/assets/cursors/tools/selection_cursor.svg), auto;
+  border: none;
+  outline: none;
 }
 
 .sprot-left {
@@ -73,11 +98,18 @@ button:focus {
   outline: none;
 }
 
+.sprot-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 
 /* Hide the default scrollbar */
 ::-webkit-scrollbar {
-  width: 8px; /* Set the width of the scrollbar */
+  /* width: w-; Set the width of the scrollbar */
+  @apply w-3;
 }
 
 /* Track */
@@ -89,14 +121,14 @@ button:focus {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   /* background: #888; Set the color of the scrollbar handle */
-  border-radius: 5px; /* Set the border radius of the scrollbar handle */
-  @apply bg-sprotText;
+  /* border-radius: 5px; Set the border radius of the scrollbar handle */
+  @apply bg-sprotBg1;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   /* background: #555; Change the color of the scrollbar handle on hover */
-  @apply bg-sprotText;
+  @apply bg-sprotBg1;
 }
 
 

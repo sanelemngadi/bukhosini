@@ -2,7 +2,7 @@ import { SprotActions, SprotToolKind } from "$lib/types";
 import { SprotToolSet } from "$wasm/sprot_app";
 import { SprotCanvasTool } from "./base";
 import { CanvasMessage } from "$components/icons";
-import { DrawingText } from "$components/canvas/toplevels";
+// import { DrawingText } from "$components/canvas/toplevels";
 
 export class SprotMessageTool extends SprotCanvasTool {
     public toolSet: SprotToolSet;
@@ -15,7 +15,7 @@ export class SprotMessageTool extends SprotCanvasTool {
         const shortkey = "C";
         super(name, id, kind, icon, shortkey);
         
-        this.panelComponent = DrawingText ;
-        this.toolSet = SprotToolSet.SprotMeasureTool;
+        // this.panelComponent = DrawingText ;
+        this.toolSet = SprotToolSet.SprotMessageTool;
     }
 }

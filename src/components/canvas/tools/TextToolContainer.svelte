@@ -42,5 +42,6 @@
         class="border pointer-events-auto absolute left-0 top-0 text-[14px] font-[Arial]"
         style="left: {point.x}px; top: {point.y}px;" 
         id="" cols="30" 
-        rows="10"></textarea>
+        rows="10">
+    </textarea>
 {/if}

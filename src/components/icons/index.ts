@@ -37,6 +37,7 @@ import Inflate from "./Inflate.svelte";
 import Constraints from "./Constraints.svelte";
 import Edit from "./Edit.svelte";
 import DimensionsIcon from "./DimensionsIcon.svelte";
+import Proportional from "./Proportional.svelte";
 
 import { LeftSide, BottomSide, RightSide, TopSide } from "./sides";
 
@@ -49,5 +50,5 @@ export {
     Hand, Minus, ProjectSetup, Trash, History, DropDown, ToolIcon,
     ICompleteSquare, Inflate, Constraints, Edit,
     LeftSide, BottomSide, RightSide, TopSide,
-    DimensionsIcon,
+    DimensionsIcon, Proportional
 }

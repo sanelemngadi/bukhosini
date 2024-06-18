@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getActionDocument, getAppViewController } from "$lib/stores";
-    import type { SprotAppViewController, SprotClientHistory, SprotDocumentState } from "$wasm/sprot_app";
+    import type { SprotAppViewController, SprotClientHistory } from "$wasm/sprot_app";
     import { onMount } from "svelte";
     import HistoryItem from "./HistoryItem.svelte";
     import { None } from "$lib/utils";
@@ -21,6 +21,11 @@
             if(appState) {
                 history = appState.get_client_history();
             }
+
+
+            console.log("history: ", history);
+            console.log("document: ", doc);
+            
         })
     })
 

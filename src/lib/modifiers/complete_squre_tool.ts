@@ -1,15 +1,12 @@
 import { SprotActions, SprotToolKind } from "$lib/types";
 import { 
-    SprotAppViewController, SprotEntity, SprotModifierToolSet, 
-    SprotSelectionWrapper
+    SprotToolSet
 } from "$wasm/sprot_app";
-import { SprotCanvasModifierTool } from "./base";
-import { None, type SprotOption } from "$lib/utils";
 import { ICompleteSquare } from "$components/icons";
+import { SprotCanvasTool } from "$lib/tools/base";
 
-export class SprotCompleteSquareTool extends SprotCanvasModifierTool {
-    private _entity: SprotOption<SprotEntity[]>;
-    private _predicate: SprotOption<(selection: SprotSelectionWrapper) => void>;
+export class SprotCompleteSquareTool extends SprotCanvasTool {
+    public toolSet: SprotToolSet;
 
     constructor() {
         const name = "Complete Square";
@@ -18,27 +15,6 @@ export class SprotCompleteSquareTool extends SprotCanvasModifierTool {
         const icon = ICompleteSquare;
         const shortkey = "X";
         super(name, id, kind, icon, shortkey);
-        
-        this.panelComponent = null ;
-        this.presets = [];
-
-        this._entity = None;
-        this._predicate = None;
+        this.toolSet = SprotToolSet.SprotCompleteSquareTool;
     }
-
-    
-    init = (app: SprotAppViewController): boolean => { 
-        return app.set_modifier_tool(SprotModifierToolSet.SprotCompleteSquareTool);
-    }
-
-    // onMouseMove = (app: SprotAppViewController, point: SprotPoint): SprotClientCursor => {
-    //     let interaction = super.onMouseMove(app, point);
-    //     // this._predicate.Some(predicate => predicate(this.selection)); 
-        
-    //     return interaction;
-    // }
-
-    // getModifiedEntity = (predicate: (selection: SprotSelectionWrapper) => void) => {
-    //     this._predicate = Some(predicate);
-    // }
 }

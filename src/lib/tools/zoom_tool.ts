@@ -14,7 +14,6 @@ export class SprotZoomTool extends SprotCanvasTool {
         const shortkey = "Z";
         super(name, id, kind, icon, shortkey);
         
-        this.panelComponent = null ;
         this.toolSet = SprotToolSet.SprotZoomTool;
     }
 }

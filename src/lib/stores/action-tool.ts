@@ -1,45 +1,31 @@
 import { canvasTools } from "$lib/api/canvastools";
-import type { SprotActions, SprotToolGroup } from "$lib/types";
+import type { SprotToolGroup } from "$lib/types";
 import { writable } from "svelte/store";
-import { setTargetTool } from "./target-tool";
 import type { SprotCanvasTool } from "$lib/tools/base";
-import type { SprotAppViewController } from "$wasm/sprot_app";
+import type { SprotToolInterface, SprotToolSet } from "$wasm/sprot_app";
 
 const initState: SprotToolGroup[] = canvasTools;
 const toolState = writable<SprotToolGroup[]>(initState);
 
-export const setActionTool = (app: SprotAppViewController, id: SprotActions) => {
+export const setActionTool = (id: SprotToolSet, presets: SprotToolInterface) => {
     toolState.update(toolGroups => {
-        let newState = toolGroups.map(group => {
-            let items: SprotCanvasTool | SprotCanvasTool[] = [];
+        let newState = toolGroups.map((group) => {
+            let activeGroup = false;
 
-            if(Array.isArray(group.tools)) {
-                items = group.tools.map(tool => {
-                    if (tool.id === id && tool.init(app)) { // this makes sure that the tool is set on the backend
-                        setTargetTool(tool); 
-                        tool.active = true;
-                        // tool.init(app); // initialize the same tool in rust
-                    } 
-                    else {
-                        tool.active = false;
-                    }
-                    return tool;
-                })
-            } else {
-                const tool = group.tools;
+            group.tools = group.tools.map((tool) => {
 
-                if (tool.id === id && tool.init(app)) { // this makes sure that the tool is set on the backend
-                    setTargetTool(tool); 
+                if(tool.toolSet === id && tool.init(presets)) {
                     tool.active = true;
-                    // tool.init(app); // initialize the same tool in rust
-                } 
-                else {
+                    activeGroup = true;
+
+                } else {
                     tool.active = false;
+                    group.active = false;
                 }
-                
-                items = tool;
-            }
-            group = { ...group, tools: items };
+                return tool;
+            });
+
+            group.active = activeGroup;
 
             return group;
         });
@@ -54,3 +40,37 @@ export const getCanvasTools = (predicate: (toolGroups: SprotToolGroup[]) => void
         predicate(groups);
     })
 }
+
+export const getTargetTool = (predicate: (tool: SprotCanvasTool) => void) => {
+    toolState.subscribe(groups => {
+        const activeGroup = groups.find(grp => grp.active);
+
+        if(activeGroup) {
+            const activeTool = activeGroup.tools.find(tl => tl.active);
+
+            if(activeTool) {
+                predicate(activeTool);
+            }
+        }
+    });
+}
+
+export const setTargetToolBusy = (busy: boolean) => {
+    toolState.update(groups => {
+        const activeGroup = groups.find(grp => grp.active);
+
+        if(activeGroup) {
+            const activeTool = activeGroup.tools.find(tl => tl.active);
+
+            if(activeTool) {
+                activeTool.isBusy = busy;
+            }
+        }
+
+        return groups;
+    });
+}
+
+// export const setTargetTool = (tool: SprotCanvasTool) => {
+//     setActionTool()
+// }

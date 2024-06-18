@@ -1,14 +1,23 @@
 <script lang="ts">
-    import Icon from "../ICON.svelte";
-  
-      export let size: number = 16;
-      export let color: string = "#000"; // # = %23
-      export let bg: string = "#fff";
-      const svg = `
-      <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="9.45283" y1="8.08869" x2="0.739834" y2="17.673" stroke="%color%" stroke-width="2"/>
-        <path d="M16.4972 0.960032C16.4752 0.408189 16.0099 -0.0212746 15.4581 0.000799037L6.46527 0.360511C5.91343 0.382584 5.48396 0.847836 5.50604 1.39968C5.52811 1.95152 5.99336 2.38099 6.54521 2.35891L14.5388 2.03917L14.8586 10.0328C14.8806 10.5846 15.3459 11.0141 15.8977 10.992C16.4496 10.9699 16.879 10.5047 16.857 9.95284L16.4972 0.960032ZM14.7632 0.32172L14.1098 1.02965L15.5794 2.38621L16.2329 1.67828L14.7632 0.32172ZM12.8028 2.44551L11.4959 3.86137L12.9655 5.21793L14.2724 3.80207L12.8028 2.44551ZM10.1889 5.27724L9.53545 5.98517L11.0051 7.34173L11.6585 6.6338L10.1889 5.27724Z" fill="%color%"/>
-      </svg>`;
-  </script>
-  
-<Icon svgString={svg} {size} {color} {bg} />    
+  import Icon from "../ICON.svelte";
+
+  export let size: number = 16;
+  export let color: string = "#000"; // # = %23
+  export let bg: string = "#fff";
+  export let disabled: boolean = false;
+  const svg = `
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_1461_29)">
+        <path d="M8.96031 6.81152L1.62305 14.8825" stroke="%color%" stroke-width="1"/>
+        <path d="M14.8931 0.808461C14.8746 0.343751 14.4828 -0.0179027 14.0181 0.000685628L6.44518 0.303601C5.98047 0.322189 5.61881 0.71398 5.6374 1.17869C5.65599 1.6434 6.04778 2.00506 6.5125 1.98646L13.2439 1.71721L13.5132 8.44869C13.5318 8.91336 13.9236 9.27504 14.3883 9.25643C14.853 9.23782 15.2146 8.84608 15.1961 8.38135L14.8931 0.808461ZM13.4329 0.270935L12.8827 0.867086L14.1202 2.00945L14.6706 1.4133L13.4329 0.270935ZM11.782 2.05939L10.6815 3.25169L11.9191 4.39406L13.0196 3.20176L11.782 2.05939ZM9.58087 4.444L9.03059 5.04016L10.2682 6.18252L10.8184 5.58637L9.58087 4.444Z" fill="%color%"/>
+        </g>
+        <defs>
+        <clipPath id="clip0_1461_29">
+        <rect width="14.3158" height="16" fill="white" transform="translate(1)"/>
+        </clipPath>
+        </defs>
+        </svg>
+`;
+</script>
+
+<Icon svgString={svg} {size} {color} {bg} {disabled} />

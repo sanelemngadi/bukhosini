@@ -1,12 +1,12 @@
 import { SprotActions, SprotToolKind } from "$lib/types";
-import { 
-    SprotAppViewController, SprotModifierToolSet
-} from "$wasm/sprot_app";
-import { RotatePanel } from "$components/canvas/toplevels";
-import { SprotCanvasModifierTool } from "./base";
+import { SprotToolSet } from "$wasm/sprot_app";
 import { Rotate } from "$components/icons/modifiers";
+import { SprotCanvasTool } from "$lib/tools/base";
+import type { ComponentType } from "svelte";
+import { IRotateMirror } from "$components/icons/presets";
 
-export class SprotRotateTool extends SprotCanvasModifierTool {
+export class SprotRotateTool extends SprotCanvasTool {
+    public toolSet: SprotToolSet;
 
     constructor() {
         const name = "Rotate";
@@ -16,13 +16,16 @@ export class SprotRotateTool extends SprotCanvasModifierTool {
         const shortkey = "E";
         super(name, id, kind, icon, shortkey);
         
-        this.panelComponent = RotatePanel ;
-        this.presets = [];
+        this.toolSet = SprotToolSet.SprotRotateTool;
     }
 
-    
-    init = (app: SprotAppViewController): boolean => { 
-        return app.set_modifier_tool(SprotModifierToolSet.SprotRotateTool);
+    getIcon(preset_id: number): ComponentType {
+        switch (preset_id) {
+            case 2:
+                return IRotateMirror;
+        
+            default:
+                return this.icon;
+        }
     }
-
 }

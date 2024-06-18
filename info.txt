@@ -1,0 +1,21 @@
+Sharing entities:
+WE have a Document and each documents contains the general CAD and survey boards
+
+GENERAL CAD
+Offer a certain functionality that a survey boards doesnts such as:
+    Topographical Surveying
+    Provide partical printing - (Export to SHP, DFX, DWG)
+    Working with different layers
+
+SURVEY BOARDS
+Offers a certain functionality that as general CAD doesnt such as:
+    Working with diagrams (Servitude diagrams, Reconstruction diagrams, Working plans)
+    Provide printing functionality - (Print to PDF)
+    have a single layer (if you import the entities from general cad then choose whether to keep colors or not)
+
+SURFACES VS LAYERS
+Surfaces carries points while Layers carries all kinds of entities.
+
+A documents can have the surfaces of difference cordinates systems (temporal surfaces) and the surfaces with the same
+cordinates system as of the documet (permanent surface)
+- We therefore can print any calculations from canvas or other surfaces to a certain surface

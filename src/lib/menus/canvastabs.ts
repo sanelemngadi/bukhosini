@@ -1,6 +1,7 @@
 import { type SprotMenubarItem, type SprotTSSize } from "$lib/types";
 import type { ComponentType } from "svelte";
-import type { SprotDocumentState } from "$wasm/sprot_app";
+// import type { SprotDocument } from "$wasm/sprot_app";
+import type { SprotClientDocument } from "$lib/application/document";
 
 export enum ISprotMenubarItemKind {
     Seperator,
@@ -14,7 +15,7 @@ export type TSprotCanvasTabItem = Pick<SprotMenubarItem, "active" | "id" | "name
     kind?: ISprotMenubarItemKind, // document kind
     icon?: ComponentType, // icon if any
     fit: boolean,
-    document: SprotDocumentState,
+    document: SprotClientDocument,
 }
 
 export class SprotCanvasTab {
@@ -28,7 +29,7 @@ export class SprotCanvasTab {
         this._active = false;
     }
 
-    addTab(name: string, document: SprotDocumentState, event: (() => {}) | null = null) {
+    addTab(name: string, document: SprotClientDocument, event: (() => {}) | null = null) {
         const canvastabItem: TSprotCanvasTabItem = {
             active: false,
             id: this._idCounter++,

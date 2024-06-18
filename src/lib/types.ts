@@ -1,8 +1,9 @@
-import type { SprotEntity } from "$wasm/sprot_app";
+import type { SprotAppViewController, SprotEntity } from "$wasm/sprot_app";
 import type { ComponentProps, ComponentType, SvelteComponent } from "svelte";
 import type { SprotCanvasTool } from "./tools/base";
 import type { SprotMenu } from "./menus/menus";
 import type { SprotOption } from "./utils";
+// import type { SprotCanvasModifierTool } from "./modifiers/base";
 
 export interface SprotToolPreset {
     id: number,
@@ -66,8 +67,10 @@ export enum SprotActions {
 
     // selection of canvas tools
     ToolSelection,
+    ToolAnchor,
     ToolLine,
     ToolDimensions,
+    ToolComments,
     ToolRectangle,
     ToolEllipse,
     ToolPen,
@@ -82,6 +85,10 @@ export enum SprotActions {
     ToolMeasure,
     ToolArrange,
     ToolAlign,
+    ToolDistribute,
+    ToolLineBulder,
+    ToolShapeBulder,
+    ToolDistr,
     ToolPencil,
     ToolArc,
 
@@ -96,6 +103,7 @@ export enum SprotActions {
     ToolCopyParalell,
     ToolCopyToMouse,
     ToolCompleteSquare,
+    ToolFillet,
     ToolRemoveSelection,
 
 
@@ -169,8 +177,11 @@ export interface SettingTools {
   }
 
 export interface SprotToolGroup {
+    id: number,
+    active: boolean,
     name: string,
-    tools: SprotCanvasTool | SprotCanvasTool[]
+    featured: boolean,
+    tools: SprotCanvasTool[] 
 }
 
 
@@ -253,7 +264,7 @@ export interface SprotMenubarItem {
 }
 
 export interface SprotListButton {
-    id: SprotActions,
+    id: number,
     name: string,
     icon: ComponentType,
     active: boolean,
@@ -266,7 +277,7 @@ export interface ISprotPanel {
     active: boolean,
     selected: boolean,
     component: ComponentType,
-    icon?: ComponentType, // remove optional in future
+    icon: ComponentType, // remove optional in future
 }
 
 export interface ISprotAccordionListItem {
@@ -316,4 +327,31 @@ export const NO_SELECTION: SprotTSSelection = {
     is_single: false,
     label: "No Selection",
     rect: { pt: {x: 0, y: 0}, sz: {w: 0, h: 0}},
+}
+
+export interface SprotDrawingProps {
+    layerId: number,
+    colorByLayer: "Layer" | `rgb(${number}, ${number}, ${number})`,
+    opacityByLayer: "Layer" | number,
+    strokeByLayer: "Layer" | `rgb(${number}, ${number}, ${number})`,
+    constraints: { "Fixed Size": {w: number, h: number} } | { "Proportional": {w: number, h: number} } |
+    { "Fixed Width": {w: number } } | { "Fixed Height": {h: number } }
+}
+
+export enum TSprotOptionType {
+    CheckButton,
+    DropDown,
+    Panel,
+}
+
+export interface ISprotOptionsPanel {
+    id: SprotActions,
+    name: string,
+    active: boolean,
+    kind: TSprotOptionType,
+    selected: boolean,
+    component?: ComponentType,
+    isDropdown: boolean,
+    icon: ComponentType,
+    onSelect: (appState: SprotAppViewController, self: ISprotOptionsPanel) => void,
 }

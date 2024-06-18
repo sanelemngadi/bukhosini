@@ -1,7 +1,7 @@
 import { SprotActions, SprotToolKind } from "$lib/types";
 import { SprotToolSet } from "$wasm/sprot_app";
 import { SprotCanvasTool } from "./base";
-import { DrawingPanel } from "$components/canvas/toplevels";
+// import { DrawingPanel } from "$components/canvas/toplevels";
 import { PencilToolIcon } from "$components/icons/tools";
 
 export class SprotPencilTool extends SprotCanvasTool {
@@ -15,7 +15,7 @@ export class SprotPencilTool extends SprotCanvasTool {
         const shortkey = "L";
         super(name, id, kind, icon, shortkey);
         
-        this.panelComponent = DrawingPanel ;
+        // this.panelComponent = DrawingPanel ;
         this.toolSet = SprotToolSet.SprotPencilTool;
     }
 }

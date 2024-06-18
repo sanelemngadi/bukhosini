@@ -15,22 +15,22 @@ COMMUNICATION
 */
 
 import { SprotClient } from "../../../src-wasm/src/sprot";
-import type { SprotClientBinder } from "./binder";
-import { SprotPanelKind, SprotSelectionWrapper, SprotToolSet, 
-    type SprotCursor, type SprotDocumentState } from "$wasm/sprot_app";
-import { setCurrentSelection } from "$lib/stores";
+import { SprotPanelKind, SprotSelection, SprotToolInterface, SprotToolSet, 
+    type SprotCursor, type SprotDocument } from "$wasm/sprot_app";
+import { setActionDocument, setActionPreset, setActionTool, setCurrentSelection } from "$lib/stores";
+import { setTargetToolBusy } from "$lib/stores/action-tool";
+import { SprotClientDocument } from "./document";
 
 
 export class SprotClientViewController extends SprotClient {
-    constructor(private _binder: SprotClientBinder) {
+    constructor() {
         super();
     }
 
-    on_selection(selection: SprotSelectionWrapper): void {
+    on_selection(selection: SprotSelection): void {
         setCurrentSelection(selection);
 
-        console.log("screen w: ", this.get_screen_width(), " h: ", this.get_screen_height(), " r: ", this.get_screen_ratio());
-        
+        // console.log("screen w: ", this.get_screen_width(), " h: ", this.get_screen_height(), " r: ", this.get_screen_ratio());
     }
 
     on_cursor(cursor: SprotCursor) {
@@ -38,8 +38,44 @@ export class SprotClientViewController extends SprotClient {
     }
 
     
-    on_document_changed(document: SprotDocumentState[]) {}
+    on_document_changed(document: SprotDocument | null) {
+        let d = new SprotClientDocument();
+        if(document) {
+            d.changeState(document);
+        }
+
+        setActionDocument(d);
+        // console.log("document changed: ", document);
+    }
+
+    on_action_preset(preset_id: number) {
+        setActionPreset(preset_id);
+    }
     
-    on_current_tool(tool_id: SprotToolSet) {}
+    on_current_tool(tool_id: SprotToolSet, presets: SprotToolInterface) {
+        setActionTool(tool_id, presets);
+    }
+
     on_current_panel(panel_id: SprotPanelKind) {}
+
+    set_tool_busy(busy: boolean) {
+        setTargetToolBusy(busy);
+    }
+
+
+    // to be implementend
+    on_document_changes_made() {
+        // on new entity added, removed or modified, and all the undoable actions and commands
+    }
+
+    on_tool_command(){
+        // the tool message and the input expected
+    }
 }
+
+/*
+We need save an image object for every document (general CAD and survey board)
+so that hovering on top of a tab shows the document drawing
+and so that navigating using navigation shows the image of an active document
+
+*/

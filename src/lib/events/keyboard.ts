@@ -117,9 +117,40 @@ export class SprotClientKeyboard {
             case match("escape"):
                 key = ESprotKey.Escape;
                 break;
+
+            case match("numpad1"):
+                key = ESprotKey.NumPad1;
+                break;
+            case match("numpad2"):
+                key = ESprotKey.NumPad2;
+                break;
+            case match("numpad3"):
+                key = ESprotKey.NumPad3;
+                break;
+            case match("numpad4"):
+                key = ESprotKey.NumPad4;
+                break;
+            case match("numpad5"):
+                key = ESprotKey.NumPad5;
+                break;
+            case match("numpad6"):
+                key = ESprotKey.NumPad6;
+                break;
+            case match("numpad7"):
+                key = ESprotKey.NumPad7;
+                break;
+            case match("numpad8"):
+                key = ESprotKey.NumPad8;
+                break;
+            case match("numpad9"):
+                key = ESprotKey.NumPad9;
+                break;
                 
         
             default:
+
+                console.log("keys: ", event.code);
+                
                 // let exhausted: unknown = 
                 key = ESprotKey.A;
                 break;

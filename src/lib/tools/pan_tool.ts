@@ -14,7 +14,6 @@ export class SprotPanTool extends SprotCanvasTool {
         const shortkey = "L";
         super(name, id, kind, icon, shortkey);
         
-        this.panelComponent = null ;
         this.toolSet = SprotToolSet.SprotPanTool;
     }
 }
